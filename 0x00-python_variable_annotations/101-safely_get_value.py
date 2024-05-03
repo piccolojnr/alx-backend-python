@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-from typing import Mapping, Any, TypeVar, Union
 
 """More involved type annotations"""
+from typing import Mapping, Any, TypeVar, Union
 
 T = TypeVar("T")
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-from typing import Callable
 
 """Complex types - functions"""
+from typing import Callable
 
 
 def make_multiplier(multiplier: float) -> Callable[[float], float]:
