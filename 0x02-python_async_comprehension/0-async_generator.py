@@ -4,8 +4,10 @@ Asyncio module
 """
 import asyncio
 import random
+import typing
 
-async def async_generator():
+
+async def async_generator() -> typing.Generator[float, None, None]:
     """
     Async generator
     """
