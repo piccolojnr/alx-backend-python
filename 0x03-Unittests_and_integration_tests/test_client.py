@@ -37,7 +37,10 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         Test GithubOrgClient._public_repos_url.
         """
-        with patch("client.GithubOrgClient.org", new_callable=PropertyMock) as mock_org:
+        with patch(
+            "client.GithubOrgClient.org",
+            new_callable=PropertyMock,
+        ) as mock_org:
             mock_org.return_value = {"repos_url": "http://google.com"}
             test = GithubOrgClient("google")
             self.assertEqual(test._public_repos_url, "http://google.com")
@@ -52,7 +55,8 @@ class TestGithubOrgClient(unittest.TestCase):
         ]
 
         with patch(
-            "client.GithubOrgClient._public_repos_url", new_callable=PropertyMock
+            "client.GithubOrgClient._public_repos_url",
+            new_callable=PropertyMock,
         ) as mock_public_repos_url:
             mock_public_repos_url.return_value = "http://google.com"
 
@@ -72,7 +76,10 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         Test GithubOrgClient.has_license.
         """
-        self.assertEqual(GithubOrgClient.has_license(repo, license_key), expected)
+        self.assertEqual(
+            GithubOrgClient.has_license(repo, license_key),
+            expected,
+        )
 
 
 @parameterized_class(
