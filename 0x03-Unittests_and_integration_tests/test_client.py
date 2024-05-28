@@ -98,31 +98,28 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     """
 
     @classmethod
-    def setUp(self) -> None:
+    def setUp(cls) -> None:
         """
         Set up test.
         """
-        r_payloads = {
-            "https://api.github.com/orgs/google": self.org_payload,
-            "https://api.github.com/orgs/google/repos": self.repos_payload,
-        }
 
         def get_effect(url):
             """
             Get effect.
             """
-            if url in r_payloads:
-                return Mock(**{"json.return_value": r_payloads[url]})
-            return HTTPError
+            if url == "https://api.github.com/orgs/google":
+                return Mock(**{"json.return_value": cls.org_payload})
+            return Mock(**{"json.return_value": cls.repos_payload})
 
-        self.get_patcher = patch("requests.get", side_effect=get_effect)
-        self.mock_get = self.get_patcher.start()
+        cls.get_patcher = patch("requests.get", side_effect=get_effect)
+        cls.mock_get = cls.get_patcher.start()
 
-    def tearDown(self) -> None:
+    @classmethod
+    def tearDown(cls) -> None:
         """
         Tear down test.
         """
-        self.get_patcher.stop()
+        cls.get_patcher.stop()
 
 
 if __name__ == "__main__":
