@@ -102,14 +102,18 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """
         Set up test.
         """
+        r_payloads = {
+            "https://api.github.com/orgs/google": self.org_payload,
+            "https://api.github.com/orgs/google/repos": self.repos_payload,
+        }
 
         def get_effect(url):
             """
             Get effect.
             """
-            if url == "https://api.github.com/orgs/google":
-                return Mock(**{"json.return_value": self.org_payload})
-            return Mock(**{"json.return_value": self.repos_payload})
+            if url in r_payloads:
+                return Mock(**{"json.return_value": r_payloads[url]})
+            return HTTPError
 
         self.get_patcher = patch("requests.get", side_effect=get_effect)
         self.mock_get = self.get_patcher.start()
