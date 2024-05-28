@@ -109,7 +109,10 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             """
             if url == "https://api.github.com/orgs/google":
                 return Mock(**{"json.return_value": cls.org_payload})
-            return Mock(**{"json.return_value": cls.repos_payload})
+            elif url == "https://api.github.com/orgs/google/repos":
+                return Mock(**{"json.return_value": cls.repos_payload})
+            else:
+                raise HTTPError
 
         cls.get_patcher = patch("requests.get", side_effect=get_effect)
         cls.mock_get = cls.get_patcher.start()
