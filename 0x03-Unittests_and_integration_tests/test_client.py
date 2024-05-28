@@ -108,8 +108,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             Get effect.
             """
             if url == "https://api.github.com/orgs/google":
-                return self.org_payload
-            return self.repos_payload
+                return Mock(**{"json.return_value": self.org_payload})
+            return Mock(**{"json.return_value": self.repos_payload})
 
         self.get_patcher = patch("requests.get", side_effect=get_effect)
         self.mock_get = self.get_patcher.start()
