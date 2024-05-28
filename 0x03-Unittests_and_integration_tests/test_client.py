@@ -97,7 +97,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     """
 
     @classmethod
-    def setUp(cls) -> None:
+    def setUpClass(cls) -> None:
         """
         Set up test.
         """
@@ -117,7 +117,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock_get = cls.get_patcher.start()
 
     @classmethod
-    def tearDown(cls) -> None:
+    def tearDownClass(cls) -> None:
         """
         Tear down test.
         """
